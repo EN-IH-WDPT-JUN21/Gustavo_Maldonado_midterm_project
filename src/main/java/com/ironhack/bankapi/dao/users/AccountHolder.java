@@ -9,11 +9,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class AccountHolder extends User {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "account_id")
-    private Account account;
+    private String test;
+
+    @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
+    private List<Account> accountPrimary;
+
+    @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
+    private List<Account> accountSecondary;
 }

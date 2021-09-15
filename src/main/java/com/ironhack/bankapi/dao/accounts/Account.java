@@ -29,8 +29,13 @@ public class Account {
             columnDefinition = "DECIMAL(10, 2)")
     private BigDecimal balance; // Should this be the Money class??
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private Set<AccountHolder> accountOwners;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "primary_owner")
+    private AccountHolder primaryOwner;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "secondaryOwner")
+    private AccountHolder secondaryOwner;
 
     private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
 
