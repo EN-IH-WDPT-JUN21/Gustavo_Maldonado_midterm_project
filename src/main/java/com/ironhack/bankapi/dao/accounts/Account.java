@@ -1,16 +1,15 @@
 package com.ironhack.bankapi.dao.accounts;
 
 import com.ironhack.bankapi.dao.users.AccountHolder;
+import com.ironhack.bankapi.dao.users.User;
+import com.ironhack.bankapi.enums.Status;
 import com.ironhack.bankapi.util.Money;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -21,8 +20,22 @@ import javax.persistence.InheritanceType;
 public class Account {
 
     @Id
-    private long id;
-    private Money balance;
-    private AccountHolder primaryOwner;
-    private AccountHolder secondaryOwner;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_id")
+    private Long id;
+
+    @Column(name = "balance",
+            nullable = false,
+            columnDefinition = "DECIMAL(10, 2)")
+    private BigDecimal balance; // Should this be the Money class??
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private Set<AccountHolder> accountOwners;
+
+    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
+
+    private Date creationDate;
+
+    private Status status;
+
 }
