@@ -19,30 +19,37 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)  // override the protected methods to provide custom implementation
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 //    @Autowired
 //    private CustomUserDetailsService customUserDetailsService;
 //
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-//        auth
-//                .userDetailsService(customUserDetailsService)
-//                .passwordEncoder(passwordEncoder);
-//    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth
+                .inMemoryAuthentication()
+                .withUser("admin")
+                .password(passwordEncoder.encode("123456"))
+                .roles("ADMIN", "USER")
+                .and()
+                .withUser("user")
+                .password(passwordEncoder.encode("123456"))
+                .roles("USER");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
         http.csrf().disable();
         http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/hello-world").authenticated();
+                .mvcMatchers(HttpMethod.GET, "/hello-world").authenticated()
+                .anyRequest().permitAll();
 //                .mvcMatchers(HttpMethod.POST, "/").authenticated()
 //                .anyRequest().permitAll();
 //                .mvcMatchers(HttpMethod.GET, "/products").authenticated()

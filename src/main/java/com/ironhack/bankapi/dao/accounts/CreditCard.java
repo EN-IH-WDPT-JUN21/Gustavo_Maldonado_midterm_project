@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class CreditCard extends Account {
     private BigDecimal creditLimit;
     private BigDecimal interestRate;

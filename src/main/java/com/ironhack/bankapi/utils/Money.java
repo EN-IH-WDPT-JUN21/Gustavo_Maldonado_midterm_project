@@ -1,4 +1,4 @@
-package com.ironhack.bankapi.util;
+package com.ironhack.bankapi.utils;
 
 import java.math.RoundingMode;
 import java.math.BigDecimal;

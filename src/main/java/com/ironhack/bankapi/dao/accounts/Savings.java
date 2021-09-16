@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Savings extends Account {
     private String secretKey; // This should be encrypted
     private BigDecimal minimumBalance;

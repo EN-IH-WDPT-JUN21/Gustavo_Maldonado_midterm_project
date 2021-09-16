@@ -13,8 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class AccountHolder extends User {
@@ -25,9 +23,9 @@ public class AccountHolder extends User {
 
     private String mailingAddress; // Should be optional
 
-//    @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
-//    private List<Account> accountPrimary;
-//
+    @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
+    private List<Account> accounts;
+
 //    @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
 //    private List<Account> accountSecondary;
 }
