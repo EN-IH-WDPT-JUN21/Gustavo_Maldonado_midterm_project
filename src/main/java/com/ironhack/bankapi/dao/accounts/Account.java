@@ -26,18 +26,30 @@ public class Account {
             columnDefinition = "DECIMAL(10, 2)")
     private BigDecimal balance; // Should this be the Money class??
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "primary_owner")
-    private AccountHolder primaryOwner;
-//
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "secondaryOwner")
+//    @JoinColumn(name = "primary_owner")
+//    private AccountHolder primaryOwner;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Will optional=true make account not require secondaryOwner (make it optional)
+//    @JoinColumn(name = "secondary_owner")
 //    private AccountHolder secondaryOwner;
+//
+//    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
 
-    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
+//    private Date creationDate;
 
-    private Date creationDate;
+//    private Status status;
 
-    private Status status;
 
+//    public Account(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal penaltyFee) {
+//        this.balance = balance;
+//        this.primaryOwner = primaryOwner;
+//        this.secondaryOwner = secondaryOwner;
+//        this.penaltyFee = penaltyFee;
+//    }
+
+
+    public Account(BigDecimal balance) {
+        this.balance = balance;
+    }
 }
