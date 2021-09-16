@@ -28,19 +28,19 @@ public class Account {
             nullable = false,
             columnDefinition = "DECIMAL(10, 2)")
     private BigDecimal balance; // Should this be the Money class??
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "primary_owner")
-    private AccountHolder primaryOwner;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "secondaryOwner")
-    private AccountHolder secondaryOwner;
-
-    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
-
-    private Date creationDate;
-
-    private Status status;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "primary_owner")
+//    private AccountHolder primaryOwner;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "secondaryOwner")
+//    private AccountHolder secondaryOwner;
+//
+//    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
+//
+//    private Date creationDate;
+//
+//    private Status status;
 
 }

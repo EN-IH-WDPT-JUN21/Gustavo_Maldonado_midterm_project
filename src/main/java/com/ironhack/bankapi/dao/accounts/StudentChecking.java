@@ -15,7 +15,5 @@ import java.util.Date;
 @Entity
 public class StudentChecking extends Account {
     private String secretKey; // What is this for? Should be encrypted?
-//    private BigDecimal penaltyFee; // Is this necessary?
-//    private Date creationDate;
-//    private Status status;
+
 }

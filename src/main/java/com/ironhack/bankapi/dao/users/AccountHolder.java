@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,11 +19,15 @@ import java.util.List;
 @Setter
 public class AccountHolder extends User {
 
-    private String test;
+    private Date dateOfBirth;
 
-    @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
-    private List<Account> accountPrimary;
+    private String address; // Should be a separate Address class
 
-    @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
-    private List<Account> accountSecondary;
+    private String mailingAddress; // Should be optional
+
+//    @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
+//    private List<Account> accountPrimary;
+//
+//    @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
+//    private List<Account> accountSecondary;
 }

@@ -9,11 +9,11 @@ public abstract class Constants {
     // SAVINGS CONSTANTS
     public final static BigDecimal SAVINGS_DFT_INTEREST_RATE = new BigDecimal("0.0025"); // What should be BigDecimal?
     public final static BigDecimal MAX_SAVINGS_INTEREST_RATE = new BigDecimal("0.5");
-    public final static BigDecimal SAVINGS_DFT_BALANCE = new BigDecimal(1000);
+    public final static BigDecimal SAVINGS_DEFAULT_BALANCE = new BigDecimal(1000);
     public final static BigDecimal SAVINGS_MIN_BALANCE = new BigDecimal(100);
 
     // CREDITCARDS CONSTANTS
-    public final static BigDecimal CC_DFT_LIMIT = new BigDecimal(100);
+    public final static BigDecimal CC_DEFAULT_LIMIT = new BigDecimal(100);
     public final static BigDecimal CC_MAX_LIMIT = new BigDecimal(100000);
     public final static BigDecimal CC_DFT_INTEREST_RATE = new BigDecimal("0.2");
     public final static BigDecimal CC_MIN_INTEREST_RATE = new BigDecimal("0.1");

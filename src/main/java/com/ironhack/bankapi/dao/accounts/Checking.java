@@ -11,11 +11,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Checking extends Account {
-        private String secretKey; // What is this for? Should be encrypted?
-//        private BigDecimal minimumBalance; // Is this necessary?
-//        private BigDecimal penaltyFee; // Is this necessary?
-//        private BigDecimal monthlyMaintenanceFee; // Could it be a boolean?
-//        private Date creationDate;
-//        private Status status;
+        private String secretKey; // This should be encrypted
+        private BigDecimal minimumBalance;
+        private BigDecimal monthlyMaintenanceFee;
 }

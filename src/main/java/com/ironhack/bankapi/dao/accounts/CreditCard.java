@@ -12,8 +12,7 @@ import java.util.Date;
 
 @Entity
 public class CreditCard extends Account {
-    private BigDecimal creditLimit; // Is this necessary?
-//    private BigDecimal interestRate;
-//    private Date creationDate; // While not in the requirements, necessary to check monthly for interest or penalty fee
+    private BigDecimal creditLimit;
+    private BigDecimal interestRate;
 
 }

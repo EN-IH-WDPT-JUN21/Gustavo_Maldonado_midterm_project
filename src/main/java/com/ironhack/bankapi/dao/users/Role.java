@@ -1,11 +1,18 @@
 package com.ironhack.bankapi.dao.users;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Role {
 
     @Id
@@ -13,8 +20,9 @@ public class Role {
     private Long id;
 
     @NotNull
-    private String role;
+    private String name;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }
