@@ -2,11 +2,13 @@ package com.ironhack.bankapi.dao.accounts;
 
 import com.ironhack.bankapi.dao.users.AccountHolder;
 import com.ironhack.bankapi.enums.Status;
+import com.ironhack.bankapi.utils.Money;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 @AllArgsConstructor
@@ -21,35 +23,37 @@ public class Account {
     @Column(name = "account_id")
     private Long id;
 
-    @Column(name = "balance",
-            nullable = false,
-            columnDefinition = "DECIMAL(10, 2)")
-    private BigDecimal balance; // Should this be the Money class??
+    @Column(name = "balance")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "account_balance", nullable = false)),
+            @AttributeOverride(name = "currency", column = @Column(name = "account_balance_currency", nullable = false))
+            }
+    )
+    private Money balance;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "primary_owner")
-//    private AccountHolder primaryOwner;
-//
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Will optional=true make account not require secondaryOwner (make it optional)
-//    @JoinColumn(name = "secondary_owner")
-//    private AccountHolder secondaryOwner;
-//
-//    private BigDecimal penaltyFee; // Is this necessary? Just use constants when necessary
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "primary_owner")
+    private AccountHolder primaryOwner;
 
-//    private Date creationDate;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Will optional=true make account not require secondaryOwner (make it optional)
+    @JoinColumn(name = "secondary_owner")
+    private AccountHolder secondaryOwner;
 
-//    private Status status;
+    // So all time dependant operations work on the same time zone
+    private LocalDateTime creationDate = LocalDateTime.now(ZoneId.of("Europe/Madrid"));
 
+    // On creation accounts default to active
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.valueOf("ACTIVE");
 
-//    public Account(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal penaltyFee) {
-//        this.balance = balance;
-//        this.primaryOwner = primaryOwner;
-//        this.secondaryOwner = secondaryOwner;
-//        this.penaltyFee = penaltyFee;
-//    }
+    public Account(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+        setBalance(balance);
+        setPrimaryOwner(primaryOwner);
+        setSecondaryOwner(secondaryOwner);
+    }
 
-
-    public Account(BigDecimal balance) {
-        this.balance = balance;
+    public void setBalance(BigDecimal balance) {
+        this.balance = new Money(balance);
     }
 }

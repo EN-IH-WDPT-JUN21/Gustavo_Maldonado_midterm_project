@@ -1,8 +1,6 @@
 package com.ironhack.bankapi.security;
 
-
-//import com.ironhack.bankapi.service.impl.CustomUserDetailsService;
-
+import com.ironhack.bankapi.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,28 +17,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)  // override the protected methods to provide custom implementation
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(15);
+    }
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
-//
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder.encode("123456"))
-                .roles("ADMIN", "USER")
-                .and()
-                .withUser("user")
-                .password(passwordEncoder.encode("123456"))
-                .roles("USER");
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class CheckingController implements ICheckingAccount {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Checking store(@RequestBody @Valid Checking checking) {
+    public Checking store(@RequestBody Checking checking) {
         return checkingRepository.save(checking);
     }
 }

@@ -1,9 +1,18 @@
 package com.ironhack.bankapi.utils;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Embeddable;
 import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@Embeddable
+@Data
+@NoArgsConstructor(force = true)
 public class Money {
 
     private static final Currency USD = Currency.getInstance("USD");
