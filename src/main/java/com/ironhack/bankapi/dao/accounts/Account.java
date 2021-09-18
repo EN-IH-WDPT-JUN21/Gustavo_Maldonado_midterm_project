@@ -1,7 +1,7 @@
 package com.ironhack.bankapi.dao.accounts;
 
 import com.ironhack.bankapi.dao.users.AccountHolder;
-import com.ironhack.bankapi.enums.Status;
+import com.ironhack.bankapi.enums.AccountStatus;
 import com.ironhack.bankapi.utils.Money;
 import lombok.*;
 
@@ -45,7 +45,7 @@ public class Account {
 
     // On creation accounts default to active
     @Enumerated(EnumType.STRING)
-    private Status status = Status.valueOf("ACTIVE");
+    private AccountStatus accountStatus = AccountStatus.valueOf("ACTIVE");
 
     public Account(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         setBalance(balance);

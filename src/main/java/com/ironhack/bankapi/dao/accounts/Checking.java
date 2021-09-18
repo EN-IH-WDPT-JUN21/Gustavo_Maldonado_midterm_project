@@ -1,16 +1,13 @@
 package com.ironhack.bankapi.dao.accounts;
 
 import com.ironhack.bankapi.dao.users.AccountHolder;
-import com.ironhack.bankapi.enums.Status;
 import com.ironhack.bankapi.utils.Money;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Getter

@@ -1,5 +1,5 @@
 package com.ironhack.bankapi.enums;
 
-public enum Status {
+public enum AccountStatus {
     FROZEN, ACTIVE
 }

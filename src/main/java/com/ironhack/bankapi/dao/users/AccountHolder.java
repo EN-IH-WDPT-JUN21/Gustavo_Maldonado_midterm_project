@@ -32,12 +32,10 @@ public class AccountHolder extends User {
     @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
     private List<Account> accountsSecondary;
 
-    public AccountHolder(String username, String password, Set<Role> roles, LocalDate dateOfBirth, String address, String mailingAddress, List<Account> accountsPrimary, List<Account> accountsSecondary) {
-        super(username, password, roles);
+    public AccountHolder(String username, String password, Role role, LocalDate dateOfBirth, String address, String mailingAddress) {
+        super(username, password, role);
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.mailingAddress = mailingAddress;
-        this.accountsPrimary = accountsPrimary;
-        this.accountsSecondary = accountsSecondary;
     }
 }

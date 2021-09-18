@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -19,15 +20,12 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "role")
+    private Set<User> user;
 
-    public Role(String name, User user) {
+    public Role(String name) {
         this.name = name;
-        this.user = user;
     }
 }
