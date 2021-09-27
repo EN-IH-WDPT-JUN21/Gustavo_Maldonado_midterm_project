@@ -18,7 +18,7 @@ public class AdminController {
 
     @PostMapping("/new")
     public Admin store(@RequestBody AdminDTO adminDTO) {
-        Admin admin = new Admin(adminDTO.getUsername(), adminDTO.getPassword(), adminDTO.getRole());
+        Admin admin = new Admin(adminDTO.getUsername(), adminDTO.getPassword());
         return adminRepository.save(admin);
     }
 }

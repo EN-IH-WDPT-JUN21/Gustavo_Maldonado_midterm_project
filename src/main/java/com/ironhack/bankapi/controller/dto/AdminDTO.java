@@ -4,6 +4,7 @@ import com.ironhack.bankapi.dao.users.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,11 +16,9 @@ public class AdminDTO {
 
     private String username;
     private String password;
-    private Role role;
 
     public AdminDTO(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = new Role("ADMIN");
     }
 }

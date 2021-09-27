@@ -39,10 +39,6 @@ public class Checking extends Account {
                 setMonthlyMaintenanceFee(monthlyMaintenanceFee);
         }
 
-        public void setSecretKey(String secretKey) {
-                this.secretKey = secretKey;
-        }
-
         public void setMinimumBalance(BigDecimal minimumBalance) {
                 this.minimumBalance = new Money(minimumBalance);
         }

@@ -1,8 +1,6 @@
-package com.ironhack.bankapi.service.impl;
+package com.ironhack.bankapi.service;
 
 import com.ironhack.bankapi.dao.users.User;
-
-
 import com.ironhack.bankapi.repository.UserRepository;
 import com.ironhack.bankapi.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +22,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         Optional<User> user = userRepository.findByUsername(username);
 
         if(!user.isPresent()){
-            throw new UsernameNotFoundException("User not found with username " + username);
+            throw new UsernameNotFoundException("User not found with username " +  username);
         }
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user.get());
 
         return customUserDetails;
     }
-
-
-
 }

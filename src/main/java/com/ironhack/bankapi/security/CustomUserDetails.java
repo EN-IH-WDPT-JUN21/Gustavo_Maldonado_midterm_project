@@ -2,7 +2,6 @@ package com.ironhack.bankapi.security;
 
 import com.ironhack.bankapi.dao.users.Role;
 import com.ironhack.bankapi.dao.users.User;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +10,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class CustomUserDetails implements UserDetails {
-
     private User user;
 
     public CustomUserDetails(User user) {
@@ -19,20 +17,21 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
-
+        for (Role role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        }
         return authorities;
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return user.getPassword();
     }
+
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return user.getUsername();
     }
 
@@ -55,6 +54,4 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 }

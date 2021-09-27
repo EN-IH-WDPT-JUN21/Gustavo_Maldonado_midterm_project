@@ -22,10 +22,7 @@ public class Role {
 
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private Set<User> user;
-
-    public Role(String name) {
-        this.name = name;
-    }
+    @ManyToOne
+    @JoinColumn
+    private User user;
 }
