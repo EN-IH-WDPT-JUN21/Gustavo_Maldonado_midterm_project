@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.ironhack.bankapi.utils.PasswordUtil.encryptedPassword;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -18,7 +20,7 @@ public class AdminController {
 
     @PostMapping("/new")
     public Admin store(@RequestBody AdminDTO adminDTO) {
-        Admin admin = new Admin(adminDTO.getUsername(), adminDTO.getPassword());
+        Admin admin = new Admin(adminDTO.getUsername(), encryptedPassword(adminDTO.getPassword()));
         return adminRepository.save(admin);
     }
 }

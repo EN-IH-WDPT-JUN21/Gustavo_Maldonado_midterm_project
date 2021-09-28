@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
 @Getter
 @Setter
 public class AdminDTO {
@@ -17,8 +18,4 @@ public class AdminDTO {
     private String username;
     private String password;
 
-    public AdminDTO(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 }

@@ -22,6 +22,13 @@ import java.util.Set;
 @NoArgsConstructor
 public class AccountHolder extends User {
 
+    public AccountHolder(String username, String password, LocalDate dateOfBirth, Address address, @Nullable Address mailingAddress) {
+        super(username, password);
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.mailingAddress = mailingAddress;
+    }
+
     private LocalDate dateOfBirth;
 
     @Embedded
