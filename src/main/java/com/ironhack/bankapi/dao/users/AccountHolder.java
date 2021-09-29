@@ -1,6 +1,9 @@
 package com.ironhack.bankapi.dao.users;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ironhack.bankapi.dao.accounts.Account;
 import com.ironhack.bankapi.utils.Address;
@@ -9,8 +12,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -43,19 +48,20 @@ public class AccountHolder extends User {
     private Address address; // Should be a separate Address class
 
     @Embedded
-    @Nullable
     @AttributeOverrides({
-            @AttributeOverride(name = "street", column = @Column(name = "mailing_street", nullable = false)),
-            @AttributeOverride(name = "number", column = @Column(name = "mailing_street_number", nullable = false)),
-            @AttributeOverride(name = "state", column = @Column(name = "mailing_state",nullable = false)),
-            @AttributeOverride(name = "country", column = @Column(name = "mailing_country",nullable = false)),
-            @AttributeOverride(name = "zipCode", column = @Column(name = "mailing_zip_code", nullable = false))
+            @AttributeOverride(name = "street", column = @Column(name = "mailing_street")),
+            @AttributeOverride(name = "number", column = @Column(name = "mailing_street_number")),
+            @AttributeOverride(name = "state", column = @Column(name = "mailing_state")),
+            @AttributeOverride(name = "country", column = @Column(name = "mailing_country")),
+            @AttributeOverride(name = "zipCode", column = @Column(name = "mailing_zip_code"))
     })
     private Address mailingAddress; // Should be optional
 
+    @JsonIgnoreProperties
     @OneToMany(mappedBy = "primaryOwner", cascade = CascadeType.ALL)
     private List<Account> accountsPrimary;
 
+    @JsonIgnoreProperties
     @Nullable
     @OneToMany(mappedBy = "secondaryOwner", cascade = CascadeType.ALL)
     private List<Account> accountsSecondary;

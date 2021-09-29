@@ -1,9 +1,12 @@
 package com.ironhack.bankapi.dao.accounts;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ironhack.bankapi.dao.users.AccountHolder;
 import com.ironhack.bankapi.enums.AccountStatus;
 import com.ironhack.bankapi.utils.Money;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -32,10 +35,12 @@ public class Account {
     )
     private Money balance;
 
+    @JsonIgnoreProperties
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "primary_owner")
     private AccountHolder primaryOwner;
 
+    @JsonIgnoreProperties
     @ManyToOne(fetch = FetchType.LAZY, optional = true) // Will optional=true make account not require secondaryOwner (make it optional)
     @JoinColumn(name = "secondary_owner")
     private AccountHolder secondaryOwner;

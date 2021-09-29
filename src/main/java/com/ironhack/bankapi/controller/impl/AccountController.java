@@ -29,19 +29,12 @@ public class AccountController implements IAccountController {
 
     @Autowired
     AccountService accountService;
-
     @Autowired
     AccountHolderRepository accountHolderRepository;
 
-    @GetMapping("/hello-world")
-    @ResponseStatus(HttpStatus.OK)
-    public String home(){
-        return "Hello Stranger!";
-    }
-
     @GetMapping("/my-account/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<AccountDTO> account(@PathVariable("id") Long userId) {
+    public List<AccountDTO> getAccountById(@PathVariable("id") Long userId) {
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String password = accountHolderRepository.getById(userId).getPassword();
         if(customUserDetails.getPassword().equals(password)) {
@@ -52,7 +45,7 @@ public class AccountController implements IAccountController {
 
     @PatchMapping("/admin/account/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AccountDTO account(@PathVariable("id") Long accountId, @RequestBody MoneyDTO newBalance) {
+    public AccountDTO updateAccount(@PathVariable("id") Long accountId, @RequestBody MoneyDTO newBalance) {
         return accountService.updateBalance(accountId, newBalance);
     }
 

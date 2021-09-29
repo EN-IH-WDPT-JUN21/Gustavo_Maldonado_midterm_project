@@ -1,5 +1,6 @@
 package com.ironhack.bankapi.dao.users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Role {
 
     private String name;
 
+    @JsonBackReference
     @ManyToOne
     private User user;
 
