@@ -26,8 +26,8 @@ public class CheckingController implements ICheckingAccount {
     public Checking store(@RequestBody CheckingDTO checkingDTO) {
         Checking checking = new Checking(
                                         checkingDTO.getBalance(),
-                                        accountHolderRepository.findById(checkingDTO.getPrimaryOwnerId()).orElse(null),
-                                        accountHolderRepository.findById(checkingDTO.getSecondaryOwnerId()).orElse(null),
+                                        checkingDTO.getPrimaryOwnerId(),
+                                        checkingDTO.getSecondaryOwnerId(),
                                         checkingDTO.getSecretKey());
         return checkingRepository.save(checking);
     }
