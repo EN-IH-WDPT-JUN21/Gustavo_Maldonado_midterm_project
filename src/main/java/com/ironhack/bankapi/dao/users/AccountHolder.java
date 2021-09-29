@@ -27,6 +27,7 @@ public class AccountHolder extends User {
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.mailingAddress = mailingAddress;
+        super.setRole("ACCOUNT_HOLDER");
     }
 
     private LocalDate dateOfBirth;

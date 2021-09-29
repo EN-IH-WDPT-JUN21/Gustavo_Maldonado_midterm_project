@@ -31,6 +31,6 @@ public class User {
     }
 
     public void setRole(String role) {
-        roles.add(new Role(role));
+        roles.add(new Role(role, this));
     }
 }

@@ -38,7 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .mvcMatchers(HttpMethod.GET, "/hello-world").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/client/new").authenticated()
+                .mvcMatchers(HttpMethod.GET, "/my-account/**").hasAnyRole("ACCOUNT_HOLDER")
+                .mvcMatchers(HttpMethod.PATCH, "/transfer/**").hasAnyRole("ACCOUNT_HOLDER")
+                .mvcMatchers(HttpMethod.PATCH, "/admin/account/**").hasAnyRole("ADMIN")
+                .mvcMatchers(HttpMethod.POST, "/client/new").hasAnyRole("ADMIN")
+                .mvcMatchers(HttpMethod.POST, "/account/checking").hasAnyRole("ADMIN")
                 .mvcMatchers(HttpMethod.POST, "admin/new").hasAnyRole("SUPER_ADMIN")
                 .anyRequest().permitAll();
     }

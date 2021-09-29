@@ -35,7 +35,15 @@ public class Savings extends Account {
     public Savings(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Money minimumBalance, BigDecimal interestRate) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
-        this.minimumBalance = minimumBalance;
-        this.interestRate = interestRate;
+        setMinimumBalance(minimumBalance);
+        setInterestRate(interestRate);
+    }
+
+    public void setMinimumBalance(Money minimumBalance) {
+        this.minimumBalance = minimumBalance == null ? new Money(new BigDecimal("1000")) : minimumBalance;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate == null ? new BigDecimal("0.0025") : interestRate;
     }
 }

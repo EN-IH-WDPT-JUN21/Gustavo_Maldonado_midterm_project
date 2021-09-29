@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 public class CheckingDTO {
 
     private BigDecimal balance;
-    private AccountHolder primaryOwnerId;
+    private Long primaryOwnerId;
     @Nullable
-    private AccountHolder secondaryOwnerId;
+    private Long secondaryOwnerId;
     private String secretKey;
 
 }

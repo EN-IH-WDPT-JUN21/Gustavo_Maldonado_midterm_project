@@ -25,7 +25,8 @@ public class Role {
     @ManyToOne
     private User user;
 
-    public Role(String name) {
+    public Role(String name, User user) {
         this.name = name;
+        this.user = user;
     }
 }
